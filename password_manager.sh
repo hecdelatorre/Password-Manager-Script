@@ -16,7 +16,7 @@ list_passwords() {
 add_password() {
     clear
     read -p "Enter the name of the site: " site
-    read -p "Enter the username: " user
+    read -p "Enter the username or email: " user
     SUBMENU_ADD=("Generate random password" "Enter password")
 
     choice=$(printf "%s\n" "${SUBMENU_ADD[@]}" | fzf --reverse)
@@ -43,7 +43,7 @@ show_password() {
     username=$(echo "$selected_pass" | awk -F '/' '{print $2}')
     echo -e "$site\n$username"
     pass show "$selected_pass"
-    pass show "$selected_pass" | tr -d '\n' |xclip -selection clipboard
+    pass show "$selected_pass" | tr -d '\n' | xclip -selection clipboard
     read -n 1 -s -r -p "Press any key to continue..."
 }
 

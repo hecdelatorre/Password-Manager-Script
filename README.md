@@ -67,8 +67,14 @@ To use `pass`, you need to have a GPG keypair generated. Here's how to set up GP
   ```
   
   ```bash
-    gpg --import private_key.asc
+  gpg --import private_key.asc
   ```
+
+## Initialize pass
+
+```bash
+pass init YOUR_GPG_KEY_ID
+```
 
 ## Menu Options
 
