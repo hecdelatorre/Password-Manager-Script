@@ -103,7 +103,7 @@ main() {
             "Show Password") show_password ;;
             "Edit Password") edit_password ;;
             "Delete Password") delete_password ;;
-            "Exit") clear && exit ;;
+            "Exit") echo -n | xclip -selection clipboard && clear && exit ;;
             *) echo "Invalid option! Press any key to try again..." && read -n 1 -s -r ;;
         esac
     done
