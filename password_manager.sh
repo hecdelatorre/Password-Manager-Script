@@ -52,7 +52,7 @@ show_password() {
 # Function to edit a password
 edit_password() {
     list_passwords
-    selected_pass=$(echo "$pass_list" | fzf --reverse)
+    selected_pass=$(echo "$pass_list" | fzf --reverse --border rounded --info inline --header "Select password to edit")
     SUBMENU_EDIT=("Generate random password" "Enter password")
     choice=$(printf "%s\n" "${SUBMENU_EDIT[@]}" | fzf --reverse --border rounded --info inline --header "Edit password")
     case $choice in
