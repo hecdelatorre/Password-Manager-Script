@@ -23,6 +23,8 @@ add_password() {
     case $choice in
         "Generate random password")
             pass generate "$site/$user" 30 # You can specify the length of the password as needed
+            password=$(pass show "$site/$user")
+            echo -n "$password" | tr -d '\n' | xclip -selection clipboard
             ;;
         "Enter password")
             read -p "Enter your password: " password 
@@ -58,6 +60,8 @@ edit_password() {
     case $choice in
         "Generate random password")
             pass generate "$selected_pass" 30 # You can specify the length of the password as needed
+            password=$(pass show "$selected_pass")
+            echo -n "$password" | tr -d '\n' | xclip -selection clipboard
             read -n 1 -s -r -p "Press any key to continue..."
             ;;
         "Enter password")
@@ -66,6 +70,9 @@ edit_password() {
                 read -p "Are you sure you want to edit the password? (y/n): " confirm
                 if [ "$confirm" == "y" ]; then
                     echo -e "$password\n$password" | pass insert "$selected_pass" --
+                    password=$(pass show "$selected_pass")
+                    echo -e "\033[1m\033[33m$password\033[0m"
+                    echo -n "$password" | tr -d '\n' | xclip -selection clipboard
                     read -n 1 -s -r -p "Press any key to continue..."
                 else
                     echo "Password edit canceled."
