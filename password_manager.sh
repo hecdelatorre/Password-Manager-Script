@@ -19,7 +19,7 @@ add_password() {
     read -p "Enter the username or email: " user
     SUBMENU_ADD=("Generate random password" "Enter password")
 
-    choice=$(printf "%s\n" "${SUBMENU_ADD[@]}" | fzf --reverse)
+    choice=$(printf "%s\n" "${SUBMENU_ADD[@]}" | fzf --reverse --border rounded --info inline --header "Add password")
     case $choice in
         "Generate random password")
             pass generate "$site/$user" 30 # You can specify the length of the password as needed
@@ -38,12 +38,14 @@ add_password() {
 # Function to show a password
 show_password() {
     list_passwords
-    selected_pass=$(echo "$pass_list" | fzf --reverse)
+    selected_pass=$(echo "$pass_list" | fzf --reverse --border rounded --info inline --header "Passwords")
     site=$(echo "$selected_pass" | awk -F '/' '{print $1}')
     username=$(echo "$selected_pass" | awk -F '/' '{print $2}')
-    echo -e "$site\n$username"
-    pass show "$selected_pass"
-    pass show "$selected_pass" | tr -d '\n' | xclip -selection clipboard
+    password=$(pass show "$selected_pass")
+
+    echo -e "\033[1mPassword in clipboard\033[0m\n$site\n$username"
+    echo -e "\033[1m\033[33m$password\033[0m"
+    echo -n "$password" | tr -d '\n' | xclip -selection clipboard
     read -n 1 -s -r -p "Press any key to continue..."
 }
 
@@ -52,7 +54,7 @@ edit_password() {
     list_passwords
     selected_pass=$(echo "$pass_list" | fzf --reverse)
     SUBMENU_EDIT=("Generate random password" "Enter password")
-    choice=$(printf "%s\n" "${SUBMENU_EDIT[@]}" | fzf --reverse)
+    choice=$(printf "%s\n" "${SUBMENU_EDIT[@]}" | fzf --reverse --border rounded --info inline --header "Edit password")
     case $choice in
         "Generate random password")
             pass generate "$selected_pass" 30 # You can specify the length of the password as needed
@@ -81,7 +83,7 @@ edit_password() {
 # Function to delete a password
 delete_password() {
     list_passwords
-    selected_pass=$(echo "$pass_list" | fzf --reverse)
+    selected_pass=$(echo "$pass_list" | fzf --reverse --border rounded --info inline --header "Delete password")
     pass rm "$selected_pass"
     read -n 1 -s -r -p "Press any key to continue..."
 }
@@ -97,7 +99,7 @@ MENU=(
 # Main function
 main() {
     while true; do
-        choice=$(printf "%s\n" "${MENU[@]}" | fzf --reverse)
+        choice=$(printf "%s\n" "${MENU[@]}" | fzf --reverse --border rounded --info inline --header "Password Manager Script")
         case $choice in
             "Add Password") add_password ;;
             "Show Password") show_password ;;
