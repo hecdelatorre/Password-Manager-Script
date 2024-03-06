@@ -42,9 +42,24 @@ add_password() {
 
 # Function to generate and copy a password
 generate_and_copy_password() {
-    pass generate "$1" 30 # You can specify the length of the password as needed
-    password=$(pass show "$1")
-    echo -n "$password" | tr -d '\n' | xclip -selection clipboard
+    OPTIONS=("20" "30" "50" "80" "100")
+    choice=$(printf "%s\n" "${OPTIONS[@]}" | fzf --reverse --border rounded --info inline --header "Select the number of password characters to generate")
+    num=0
+    case $choice in
+        "20") num=20 ;;
+        "30") num=30 ;;
+        "50") num=50 ;;
+        "80") num=80 ;;
+        "100") num=100 ;;
+        *) echo "Invalid choice. Please enter a valid option." ;;
+    esac
+
+    if [ $num -ne 0 ]; then
+        pass generate "$1" $num # You can specify the length of the password as needed
+        password=$(pass show "$1")
+        echo -n "$password" | tr -d '\n' | xclip -selection clipboard
+        echo "Password generated and copied to clipboard."
+    fi
 }
 
 # Function to show a password
