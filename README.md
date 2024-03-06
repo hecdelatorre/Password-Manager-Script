@@ -2,6 +2,8 @@
 
 This is a simple Bash script for managing passwords using the `pass` password manager tool. The script provides a user-friendly menu interface to add, show, edit, and delete passwords stored in the `pass` password store.
 
+![](capture.png)
+
 ## Dependencies
 
 Before using the script, ensure you have the following dependencies installed:
