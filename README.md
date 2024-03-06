@@ -10,25 +10,26 @@ Before using the script, ensure you have the following dependencies installed:
 - `fzf`: A command-line fuzzy finder used for interactive selection.
 - `jq`: A lightweight and flexible command-line JSON processor.
 - `xclip`: A command-line utility for interacting with the X11 clipboard.
+- `tree`: A command-line utility for displaying directory structures.
 
 ### Installing Dependencies
 
 #### Debian/Ubuntu:
 
 ```bash
-sudo apt install pass fzf jq xclip
+sudo apt install pass fzf jq xclip tree
 ```
 
 #### Fedora:
 
 ```bash
-sudo dnf install pass fzf jq xclip
+sudo dnf install pass fzf jq xclip tree
 ```
 
 #### Arch Linux:
 
 ```bash
-sudo pacman -Sy pass fzf jq xclip
+sudo pacman -Sy pass fzf jq xclip tree
 ```
 
 ## GPG Key Setup
