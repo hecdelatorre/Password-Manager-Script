@@ -95,9 +95,9 @@ pass init YOUR_GPG_KEY_ID
 
 To use the password manager script, simply run the script in your terminal:
 
-bash
-
-`./password_manager.sh`
+```bash
+./password_manager.sh
+```
 
 Follow the on-screen instructions to navigate through the menu options and manage your passwords efficiently.
 
